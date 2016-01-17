@@ -8,6 +8,15 @@ include RandomData
  end
  topics = Topic.all
 
+20.times do
+  Sponsoredpost.create!(
+  topic: topics.sample,
+  title: RandomData.random_sentence,
+  body: RandomData.random_paragraph
+  )
+end
+sponsoredposts = Sponsoredpost.all
+
 50.times do
   Post.create!(
     topic: topics.sample,
@@ -26,6 +35,7 @@ end
 
 puts "Seed finished"
 puts "#{Topic.count} topics created"
+puts "#{Sponsoredpost.count} sponsors created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 # This file should contain all the record creation needed to seed the database with its default values.
