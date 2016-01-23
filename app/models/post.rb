@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 
+  after_create :create_vote
+  
   default_scope { order('rank DESC') }
 
   validates :title, length: { minimum: 5 }, presence: true
@@ -31,4 +33,9 @@ class Post < ActiveRecord::Base
     update_attribute(:rank, new_rank)
   end
 
+  private
+
+  def create_vote
+    user.votes.create(value:1, post: self)
+  end
 end
