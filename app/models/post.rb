@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 
+  after_create :autofavorite
   default_scope { order('rank DESC') }
 
   validates :title, length: { minimum: 5 }, presence: true
@@ -32,4 +33,8 @@ class Post < ActiveRecord::Base
     update_attribute(:rank, new_rank)
   end
 
+  def autofavorite
+      Favorite.create(post: self, user: self.user)
+      # FavoriteMailer.new_post(self).deliver_now
+  end
 end
