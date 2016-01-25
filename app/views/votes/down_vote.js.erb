@@ -1,0 +1,7 @@
+// # <% if @post.down_vote? %>
+// #    $('#vote-' +<%= @post.id %>).hide();
+// #    $('.js-votes-count').html("<%= pluralize(@vote.post.votes.count, 'vote') %>");
+// #  <% else %>
+// #    $('#vote-' +<%= @post.id %>).prepend("<div class='alert alert-danger'><%= flash.now[:alert] %></div>");
+// #  <% end %>
+$('#post-<%= @post.id %>-vote').html("<strong><%= @post.points %></strong>");
